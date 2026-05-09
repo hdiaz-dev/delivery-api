@@ -1,0 +1,18 @@
+# Maven
+target/
+*.class
+
+# Spring Boot properties con credenciales
+src/main/resources/application.properties
+
+# IDE
+.classpath
+.project
+.settings/
+*.iml
+.idea/
+
+# Logs
+*.log
+# Carpeta bin de Eclipse
+bin/
