@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+
+  postgresql:
+    image: postgres:16
+    container_name: delivery-db
+    environment:
+      POSTGRES_DB: delivery_db
+      POSTGRES_USER: delivery_user
+      POSTGRES_PASSWORD: delivery123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  delivery-api:
+    build: .
+    container_name: delivery-api
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresql:5432/delivery_db
+      SPRING_DATASOURCE_USERNAME: delivery_user
+      SPRING_DATASOURCE_PASSWORD: delivery123
+    depends_on:
+      - postgresql
+
+volumes:
+  postgres-data:
